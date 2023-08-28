@@ -7,7 +7,7 @@ async function start() {
   const client = new MongoClient(url);
 
   await client.connect();
-  const db = client.db("fsv-db");
+  const db = client.db("fs-db");
 
   const app = express();
   app.use(express.json());
@@ -23,6 +23,7 @@ async function start() {
 
   app.get("/api/products", async (req, res) => {
     const products = await db.collection("products").find({}).toArray();
+    console.log(products);
     res.send(products);
   });
 
